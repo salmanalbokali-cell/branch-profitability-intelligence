@@ -38,6 +38,21 @@ BigQuery and SQL validation confirmed:
 - All 19 metadata definitions match the actual table schemas
 
 SQL evidence: [View BigQuery profiling queries](../B_sql/01_prepare/01_data_profiling.sql)
+## BigQuery Execution Evidence
+
+<details>
+<summary>View validation screenshots</summary>
+
+### Raw BigQuery Environment
+![BigQuery raw environment](../C_evidence/01_prepare/01_bigquery_raw_environment.png)
+
+### Sales Profiling Validation
+![Sales profiling validation](../C_evidence/01_prepare/02_sales_profiling_validation.png)
+
+### Relationship Validation
+![Relationship validation](../C_evidence/01_prepare/03_relationship_validation.png)
+
+</details>
 
 ## Processing Requirements
 
