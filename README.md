@@ -17,9 +17,9 @@ January–September 2023 vs. January–September 2022:
 
 ## Project Workflow
 
-A. Documentation  
-B. SQL  
-C. Evidence  
+A. [Documentation](A_docs/)  
+B. [SQL](B_sql/)  
+C. [Evidence](C_evidence/)  
 D. Data Processing  
 E. Analysis  
 F. Dashboard & Reporting
