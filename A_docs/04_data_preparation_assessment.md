@@ -37,7 +37,7 @@ BigQuery and SQL validation confirmed:
 - All 50 stores and all 35 products appear in sales
 - All 19 metadata definitions match the actual table schemas
 
-SQL evidence: [View BigQuery profiling queries](../sql/prepare/01_data_profiling.sql)
+SQL evidence: [View BigQuery profiling queries](../B_sql/01_prepare/01_data_profiling.sql)
 
 ## Processing Requirements
 
