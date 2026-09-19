@@ -26,13 +26,17 @@ F. Dashboard & Reporting
 
 ## Current Stage
 
-**PREPARE**
+**PROCESS — Completed**
 
-The source data has been loaded into Google BigQuery and assessed for structure, grain, keys, relationships, metadata, completeness, validity, and analytical limitations.
+The RAW source layer has been preserved and transformed into a separate analysis-ready CLEAN layer in Google BigQuery.
 
-Cleaning and transformation will be handled separately in the PROCESS stage.
+The PROCESS stage included:
 
-## Data Source
+- Data-type conversion for dates, quantities, costs, and prices
+- `lower_snake_case` naming standardization
+- CLEAN-layer metadata alignment
+- Post-clean key and relationship validation
+- Temporal-integrity validation
+- RAW vs CLEAN row-preservation auditing
 
-Mexico Toy Sales — Maven Analytics  
-Public-domain dataset representing a fictitious multi-store toy retailer in Mexico.
+All required PROCESS checks passed, and the CLEAN dataset is ready for the ANALYZE stage.
