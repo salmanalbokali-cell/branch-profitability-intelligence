@@ -1,0 +1,135 @@
+
+-- ============================================================
+-- Store Margin & Performance Intelligence
+-- ANALYZE | 02 - Financial Year-over-Year Comparison
+-- Platform: Google BigQuery (Standard SQL)
+--
+-- Business Question:
+-- How did financial performance change between
+-- Jan-Sep 2022 and Jan-Sep 2023?
+--
+-- Reporting Grain:
+-- One row per financial KPI (5 rows total)
+--
+-- Source:
+-- Validated CLEAN sales and products tables
+--
+-- Financial Definitions:
+-- Revenue      = SUM(units * product_price)
+-- COGS         = SUM(units * product_cost)
+-- Gross Profit = SUM(units * (price - cost))
+-- Gross Margin = Gross Profit / Revenue * 100
+-- YoY Growth   = (2023 value - 2022 value)
+--                / 2022 value * 100
+--
+-- Reporting Notes:
+-- 1. Values remain numeric for downstream analysis.
+-- 2. Gross margin change is in percentage points (pp).
+-- 3. Gross margin YoY growth is intentionally NULL.
+-- 4. All comparisons use equivalent Jan-Sep periods.
+--
+-- Limitation:
+-- Product prices and costs are source attributes,
+-- not verified historical transaction-level amounts.
+-- Results represent modeled gross financial performance,
+-- not operating or net profit.
+-- ============================================================
+
+WITH annual_financials AS (
+
+    SELECT
+        EXTRACT(YEAR FROM s.date) AS sales_year,
+        SUM(s.units) AS units_sold,
+        SUM(s.units * p.product_price) AS revenue,
+        SUM(s.units * p.product_cost) AS cogs,
+        SUM(
+            s.units * (p.product_price - p.product_cost)
+        ) AS gross_profit
+
+    FROM `store-margin-intelligence.maven_toys_clean.sales` AS s
+
+    INNER JOIN `store-margin-intelligence.maven_toys_clean.products` AS p
+        ON s.product_id = p.product_id
+
+    WHERE
+        (s.date BETWEEN '2022-01-01' AND '2022-09-30')
+        OR
+        (s.date BETWEEN '2023-01-01' AND '2023-09-30')
+
+    GROUP BY sales_year
+),
+
+kpi_values AS (
+
+    SELECT
+        sales_year,
+        'Units Sold' AS kpi,
+        1 AS sort_order,
+        CAST(units_sold AS NUMERIC) AS kpi_value
+    FROM annual_financials
+
+    UNION ALL
+
+    SELECT sales_year, 'Revenue', 2, revenue
+    FROM annual_financials
+
+    UNION ALL
+
+    SELECT sales_year, 'COGS', 3, cogs
+    FROM annual_financials
+
+    UNION ALL
+
+    SELECT sales_year, 'Gross Profit', 4, gross_profit
+    FROM annual_financials
+
+    UNION ALL
+
+    SELECT
+        sales_year,
+        'Gross Margin %',
+        5,
+        SAFE_DIVIDE(gross_profit, revenue) * 100
+    FROM annual_financials
+),
+
+kpi_comparison AS (
+
+    SELECT
+        kpi,
+        sort_order,
+
+        MAX(IF(sales_year = 2022, kpi_value, NULL))
+            AS value_2022,
+
+        MAX(IF(sales_year = 2023, kpi_value, NULL))
+            AS value_2023
+
+    FROM kpi_values
+    GROUP BY kpi, sort_order
+)
+
+SELECT
+    kpi,
+
+    ROUND(value_2022, 2) AS value_2022,
+    ROUND(value_2023, 2) AS value_2023,
+
+    ROUND(
+        value_2023 - value_2022,
+        2
+    ) AS change_value,
+
+    CASE
+        WHEN kpi = 'Gross Margin %' THEN NULL
+        ELSE ROUND(
+            SAFE_DIVIDE(
+                value_2023 - value_2022,
+                value_2022
+            ) * 100,
+            2
+        )
+    END AS yoy_growth_pct
+
+FROM kpi_comparison
+ORDER BY sort_order;
