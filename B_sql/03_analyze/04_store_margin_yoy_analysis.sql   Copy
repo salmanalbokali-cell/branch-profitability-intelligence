@@ -1,0 +1,138 @@
+
+-- ============================================================
+-- Store Margin & Performance Intelligence
+-- ANALYZE | 04 - Store-Level Financial YoY Analysis
+-- Platform: Google BigQuery (Standard SQL)
+--
+-- BUSINESS QUESTION
+-- Which stores experienced the greatest deterioration in
+-- gross-margin rates, and how did revenue and gross profit
+-- change between Jan-Sep 2022 and Jan-Sep 2023?
+--
+-- REPORTING GRAIN
+-- One row per store (50 stores expected).
+--
+-- FINANCIAL DEFINITIONS
+-- Revenue      = SUM(units * product_price)
+-- COGS         = SUM(units * product_cost)
+-- Gross Profit = Revenue - COGS
+-- Gross Margin = Gross Profit / Revenue * 100
+-- YoY Growth   = (2023 value - 2022 value)
+--                / 2022 value * 100
+-- GM Change    = GM 2023 - GM 2022 (percentage points)
+--
+-- METHODOLOGY
+-- 1. Aggregate sales to store-year level.
+-- 2. Compare equivalent Jan-Sep reporting periods.
+-- 3. Calculate revenue and gross-profit growth.
+-- 4. Calculate gross-margin percentage-point changes.
+-- 5. Rank stores by gross-margin deterioration.
+--
+-- INTERPRETATION
+-- This ranking identifies store-level margin-rate changes.
+-- It does not measure each store's contribution to the
+-- company-wide gross-margin decline.
+--
+-- LIMITATIONS
+-- Product prices and costs are source attributes, not
+-- verified historical transaction-level amounts.
+-- Results represent modeled gross financial performance,
+-- not operating or net profit.
+-- ============================================================
+
+WITH store_financials AS (
+
+    SELECT
+        s.store_id,
+        st.store_name,
+        EXTRACT(YEAR FROM s.date) AS sales_year,
+
+        SUM(s.units * p.product_price) AS revenue,
+
+        SUM(
+            s.units * (p.product_price - p.product_cost)
+        ) AS gross_profit
+
+    FROM `store-margin-intelligence.maven_toys_clean.sales` AS s
+
+    INNER JOIN `store-margin-intelligence.maven_toys_clean.products` AS p
+        ON s.product_id = p.product_id
+
+    INNER JOIN `store-margin-intelligence.maven_toys_clean.stores` AS st
+        ON s.store_id = st.store_id
+
+    WHERE
+        (s.date BETWEEN '2022-01-01' AND '2022-09-30')
+        OR
+        (s.date BETWEEN '2023-01-01' AND '2023-09-30')
+
+    GROUP BY
+        s.store_id,
+        st.store_name,
+        sales_year
+),
+
+store_comparison AS (
+
+    SELECT
+        store_id,
+        store_name,
+
+        MAX(IF(sales_year = 2022, revenue, NULL))
+            AS revenue_2022,
+
+        MAX(IF(sales_year = 2023, revenue, NULL))
+            AS revenue_2023,
+
+        MAX(IF(sales_year = 2022, gross_profit, NULL))
+            AS gp_2022,
+
+        MAX(IF(sales_year = 2023, gross_profit, NULL))
+            AS gp_2023
+
+    FROM store_financials
+    GROUP BY store_id, store_name
+)
+
+SELECT
+    store_id,
+    store_name,
+
+    ROUND(
+        SAFE_DIVIDE(
+            revenue_2023 - revenue_2022,
+            revenue_2022
+        ) * 100,
+        2
+    ) AS revenue_yoy_pct,
+
+    ROUND(
+        SAFE_DIVIDE(
+            gp_2023 - gp_2022,
+            gp_2022
+        ) * 100,
+        2
+    ) AS gp_yoy_pct,
+
+    ROUND(
+        SAFE_DIVIDE(gp_2022, revenue_2022) * 100,
+        2
+    ) AS gm_2022_pct,
+
+    ROUND(
+        SAFE_DIVIDE(gp_2023, revenue_2023) * 100,
+        2
+    ) AS gm_2023_pct,
+
+    ROUND(
+        (
+            SAFE_DIVIDE(gp_2023, revenue_2023)
+            -
+            SAFE_DIVIDE(gp_2022, revenue_2022)
+        ) * 100,
+        2
+    ) AS gm_change_pp
+
+FROM store_comparison
+
+ORDER BY gm_change_pp ASC;
