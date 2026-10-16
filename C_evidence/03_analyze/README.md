@@ -42,25 +42,54 @@ prices and costs.
 
 ---
 
+
 ## 3. Evidence Register
 
-The following evidence files are planned.
+The ANALYZE stage contains three selected evidence files.
+Together, they demonstrate financial accuracy, analytical
+investigation, and the identification of performance trends.
 
-| ID | Evidence filename | Related SQL | Verification objective |
+| ID | Evidence | Related SQL | Verification objective |
 |---|---|---|---|
-| A01 | `01_company_financial_baseline.png` | 01–03 | Confirm 2022 and 2023 financial KPIs |
-| A02 | `02_financial_reconciliation.png` | 03 | Confirm financial reconciliation status |
-| A03 | `03_store_margin_decomposition.png` | 06 | Verify within-store and store-mix effects |
-| A04 | `04_category_margin_decomposition.png` | 08 | Verify within-category and category-mix effects |
-| A05 | `05_product_margin_mix_decomposition.png` | 11 | Verify product-mix contributions and company reconciliation |
-| A06 | `06_monthly_margin_trends.png` | 12 | Verify monthly YoY margin changes and financial totals |
+| A01 | [Financial Reconciliation](01_financial_reconciliation.png) | 01–03 | Verify company financial KPIs and reconciliation controls |
+| A02 | [Gross-Margin Decomposition](02_margin_decomposition.png) | 06, 08, 11 | Present the independently reconciled store, category, and product decompositions |
+| A03 | [Monthly Margin Trends](03_monthly_margin_trends.png) | 12 | Show monthly YoY gross-margin changes and identify the largest declines |
 
-**Evidence status:** Planned. Filenames in this register do
-not indicate that screenshots have already been uploaded.
+### Evidence Coverage
 
-Additional screenshots should be included only when they
-demonstrate a material finding or validation control not
-already covered by the existing evidence.
+**A01 — Financial Reconciliation**
+
+Supports the validated company financial baseline and
+financial reconciliation controls.
+
+**A02 — Gross-Margin Decomposition**
+
+A consolidated presentation summary derived from validated
+BigQuery results. It compares store-level, category-level,
+and product-level analyses.
+
+Each decomposition independently reconciles to the same
+company gross-margin change of -3.3464 percentage points.
+
+These effects must not be added together.
+
+**A03 — Monthly Margin Trends**
+
+Supports the January–September comparison between 2022
+and 2023.
+
+July and August experienced the largest individual
+monthly YoY gross-margin declines.
+
+### Evidence Status
+
+All three selected evidence files have been uploaded.
+
+The complete SQL queries remain available in
+[B_sql/03_analyze](../../B_sql/03_analyze/).
+
+Additional screenshots are not required for the
+current portfolio scope.
 
 ---
 
@@ -176,7 +205,6 @@ the findings to management or portfolio reviewers.
 
 **Stage:** ANALYZE
 
-**Evidence register status:** Created; evidence collection pending.
-
+**Evidence register status:** Complete — 3 selected evidence files documented.
 **Next stage:** SHARE — Executive Dashboard and
 Portfolio Presentation.
