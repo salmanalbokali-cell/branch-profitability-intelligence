@@ -1,0 +1,165 @@
+
+-- ============================================================
+-- Store Margin & Performance Intelligence
+-- ANALYZE | 03 - Financial KPI Reconciliation
+-- Platform: Google BigQuery (Standard SQL)
+--
+-- Business Objective:
+-- Validate financial arithmetic, sales-to-products JOIN
+-- integrity, transaction matching, and sale ID uniqueness.
+--
+-- Scope: Jan-Sep 2022 and Jan-Sep 2023
+--
+-- Expected Output:
+-- Four validation rows with PASS/FAIL results.
+--
+-- Limitation:
+-- These checks do not independently validate historical
+-- transaction-level product prices or costs.
+-- ============================================================
+
+WITH reporting_sales AS (
+
+    SELECT *
+    FROM `store-margin-intelligence.maven_toys_clean.sales`
+    WHERE
+        (date BETWEEN '2022-01-01' AND '2022-09-30')
+        OR
+        (date BETWEEN '2023-01-01' AND '2023-09-30')
+),
+
+product_matches AS (
+
+    SELECT
+        s.sale_id,
+        s.units,
+        COUNT(p.product_id) AS match_count
+
+    FROM reporting_sales AS s
+
+    LEFT JOIN `store-margin-intelligence.maven_toys_clean.products` AS p
+        ON s.product_id = p.product_id
+
+    GROUP BY s.sale_id, s.units
+),
+
+financial_totals AS (
+
+    SELECT
+        SUM(s.units * p.product_price) AS revenue,
+        SUM(s.units * p.product_cost) AS cogs,
+        SUM(
+            s.units * (p.product_price - p.product_cost)
+        ) AS gross_profit
+
+    FROM reporting_sales AS s
+
+    INNER JOIN `store-margin-intelligence.maven_toys_clean.products` AS p
+        ON s.product_id = p.product_id
+),
+
+join_totals AS (
+
+    SELECT
+        (SELECT COUNT(*) FROM reporting_sales)
+            AS rows_before,
+
+        (SELECT COUNT(*) FROM product_matches)
+            AS matched_transaction_groups,
+
+        (SELECT COALESCE(SUM(match_count), 0)
+         FROM product_matches)
+            AS rows_after,
+
+        (SELECT SUM(units) FROM reporting_sales)
+            AS units_before,
+
+        (SELECT SUM(s.units)
+         FROM reporting_sales AS s
+         INNER JOIN `store-margin-intelligence.maven_toys_clean.products` AS p
+             ON s.product_id = p.product_id)
+            AS units_after
+),
+
+validation_results AS (
+
+    -- Test 1: Financial arithmetic
+    SELECT
+        1 AS test_order,
+        'Financial Arithmetic' AS validation_test,
+
+        IF(
+            ABS(revenue - cogs - gross_profit) < 0.01,
+            'PASS',
+            'FAIL'
+        ) AS status
+
+    FROM financial_totals
+
+    UNION ALL
+
+    -- Test 2: JOIN row and unit preservation
+    SELECT
+        2,
+        'JOIN Row and Unit Preservation',
+
+        IF(
+            rows_before = rows_after
+            AND units_before = units_after,
+            'PASS',
+            'FAIL'
+        )
+
+    FROM join_totals
+
+    UNION ALL
+
+    -- Test 3: Exactly one product match per transaction
+    SELECT
+        3,
+        'Transaction-to-Product Matching',
+
+        IF(
+            COUNTIF(match_count != 1) = 0
+            AND COUNT(*) = (SELECT COUNT(*) FROM reporting_sales),
+            'PASS',
+            'FAIL'
+        )
+
+    FROM product_matches
+
+    UNION ALL
+
+    -- Test 4: Unique, non-NULL sale IDs
+    SELECT
+        4,
+        'Sale ID Uniqueness',
+
+        IF(
+            COUNT(*) = COUNT(DISTINCT sale_id)
+            AND COUNTIF(sale_id IS NULL) = 0,
+            'PASS',
+            'FAIL'
+        )
+
+    FROM reporting_sales
+)
+
+SELECT
+    validation_test,
+    status,
+
+    COUNTIF(status = 'PASS') OVER ()
+        AS tests_passed,
+
+    COUNT(*) OVER ()
+        AS total_tests,
+
+    IF(
+        COUNTIF(status = 'FAIL') OVER () = 0,
+        'ALL CHECKS PASSED',
+        'REVIEW REQUIRED'
+    ) AS overall_status
+
+FROM validation_results
+ORDER BY test_order;
