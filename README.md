@@ -1,211 +1,389 @@
 
 # Store Margin & Performance Intelligence
 
-### Financial Performance Analysis | Google BigQuery | SQL | Retail Analytics
+**Financial Data Analytics Portfolio | Google BigQuery · SQL · Tableau Public · GitHub**
 
-An end-to-end retail financial analytics case study investigating why
-gross-margin performance deteriorated despite substantial revenue and
-unit-sales growth.
+An end-to-end retail financial analytics case study examining **why modeled gross margin declined despite strong revenue and unit-sales growth**.
 
-The project uses the Maven Analytics Mexico Toy Sales dataset to examine
-company-wide performance, store profitability, product-category mix,
-product-level contributions, and monthly financial trends.
+Using the Maven Analytics Mexico Toy Sales dataset, this project moves from data preparation and financial reconciliation to store, product, category, and monthly analysis, concluding with three interactive executive dashboards and evidence-based management recommendations.
 
-The objective is to transform validated financial data into
-evidence-based insights that support management decision-making.
+### [Explore the Interactive Tableau Dashboards](https://public.tableau.com/views/StoreMarginPerformanceIntelligence/ExecutiveDashboardFinancialPerformance)
 
+**Reporting Period:** January–September 2022 vs. January–September 2023  
+**Business Scope:** 50 stores across Mexico  
+**Tools:** Google BigQuery, SQL, Tableau Public, GitHub  
+**Project Status:** Completed analytical and visualization stages
 
-## Interactive Tableau Dashboard
-
-Explore the complete Store Margin & Performance Intelligence project through three interactive executive dashboards:
-
-**[View the Interactive Tableau Dashboard](https://public.tableau.com/views/StoreMarginPerformanceIntelligence/ExecutiveDashboardFinancialPerformance)**
-
-The interactive experience includes:
-
-- **01 | Executive Overview:** Financial KPIs, revenue growth, gross margin deterioration, and category contributions.
-- **02 | Monthly Performance:** Monthly revenue trends and gross margin comparisons.
-- **03 | Store Profitability:** Location performance, margin evolution, and the Top 10 stores by modeled financial margin impact.
+> **Financial interpretation:** Revenue, COGS, and gross profit are modeled using static product-master prices and costs. They do not represent independently verified historical accounting transactions.
 
 ---
 
 ## 1. Business Problem
 
-The company achieved strong sales growth during January–September 2023
-compared with the equivalent period in 2022.
+Strong sales growth does not necessarily translate into improved profitability.
 
-However, gross profit grew more slowly than revenue, resulting in a
-decline in the company's gross-margin percentage.
+Between January–September 2022 and the equivalent period in 2023, the company experienced significant revenue growth. However, modeled cost of goods sold increased faster than revenue, resulting in deterioration of the company's overall gross-margin percentage.
 
-This raises a central business question:
+### Central Business Question
 
-> Why did gross margin deteriorate despite strong sales growth,
-> and which stores, categories, products, and periods deserve
-> management attention?
+> Why did gross margin deteriorate despite strong revenue growth, and which stores, product categories, individual products, and reporting periods deserve management attention?
 
-The analysis addresses this question through financial reconciliation,
-year-over-year comparisons, and gross-margin decomposition.
+The project addresses this question through:
+
+- Financial KPI reconciliation
+- Year-over-year performance comparisons
+- Store-level profitability analysis
+- Category-level margin decomposition
+- Product-level margin-mix contributions
+- Monthly financial trend analysis
+- Modeled store financial-impact measurement
+- Interactive executive reporting
+
+The ultimate objective is to transform financial data into actionable business intelligence.
 
 ---
 
 ## 2. Executive Financial Summary
 
-**Comparison:** January 1–September 30, 2022 vs.
-January 1–September 30, 2023
+**Comparable Reporting Periods:**
 
-| Financial KPI | 2022 | 2023 | YoY change |
+- January 1–September 30, 2022
+- January 1–September 30, 2023
+
+| Financial KPI | 2022 | 2023 | YoY Change |
 |---|---:|---:|---:|
-| Units sold | 384,415 | 541,073 | +40.75% |
-| Revenue | 5,320,115.85 | 6,962,074.27 | +30.86% |
-| Cost of goods sold | 3,748,078.85 | 5,137,832.27 | +37.08% |
-| Gross profit | 1,572,037.00 | 1,824,242.00 | +16.04% |
-| Gross margin | 29.5489% | 26.2026% | -3.3464 pp |
+| Units Sold | 384,415 | 541,073 | +40.75% |
+| Modeled Revenue | $5,320,115.85 | $6,962,074.27 | **+30.86%** |
+| Modeled COGS | $3,748,078.85 | $5,137,832.27 | **+37.08%** |
+| Modeled Gross Profit | $1,572,037.00 | $1,824,242.00 | **+16.04%** |
+| Modeled Gross Margin | 29.5489% | 26.2026% | **−3.3464 pp** |
 
-### Key Finding
+### Executive Interpretation
 
-Revenue increased by **30.86%**, but gross profit increased by only
-**16.04%**.
+Revenue increased by **30.86%**, but modeled gross profit increased by only **16.04%**.
 
-Gross margin declined by **3.3464 percentage points**, indicating that
-the business generated less modeled gross profit per unit of revenue.
+The primary financial observation is that modeled COGS grew faster than revenue, resulting in a decline of **3.3464 percentage points** in the company-wide gross-margin rate.
 
-Although total gross profit increased, the company's gross-margin
-percentage deteriorated.
+This does not mean total gross profit declined. Rather, the company generated less modeled gross profit per dollar of revenue in 2023 than in 2022.
+
+**Management concern:** Sales expansion was not accompanied by proportional growth in modeled gross profitability.
 
 ---
 
-## 3. Key Analytical Findings
+## 3. Interactive Tableau Dashboards
 
-### Finding 1 — Margin Deterioration Was Widespread Across Stores
+The completed analytical results are presented through three interconnected Tableau dashboards designed to support executive financial decision-making.
 
-- 49 of 50 stores experienced a lower gross-margin percentage.
-- Guadalajara 1 was the only store with an improvement.
-- The within-store margin component accounted for approximately
-  99.28% of the net company margin decline in the store-level
-  decomposition.
+### [Launch the Complete Interactive Dashboard](https://public.tableau.com/views/StoreMarginPerformanceIntelligence/ExecutiveDashboardFinancialPerformance)
 
-**Management implication:** Prioritize investigation of product-mix
-and profitability changes within stores rather than focusing only
-on shifts in revenue between locations.
+### 01 — Executive Financial Overview
 
-### Finding 2 — Product Category Mix Changed Significantly
+**Purpose:** Communicate overall financial performance and identify the principal drivers of gross-margin deterioration.
 
-- Electronics revenue declined by 27.85%.
-- Electronics revenue share fell from approximately 21.00%
-  to 11.58%.
-- Art & Crafts revenue increased by 251.90%.
-- Art & Crafts revenue share expanded from approximately
-  9.61% to 25.84%.
+**Key Features:**
 
-The category-level decomposition attributed:
+- Revenue Growth YoY
+- Gross Profit Growth YoY
+- COGS Growth YoY
+- Gross Margin Change
+- Revenue comparison: 2022 vs. 2023
+- Gross-margin comparison: 2022 vs. 2023
+- Product-category gross-margin contributions
+- Executive analytical findings
 
-- **-1.7934 pp** to within-category margin changes.
-- **-1.5529 pp** to category revenue-mix changes.
+**Business Value:**
 
-Both components reconcile to the overall **-3.3464 pp** company
-gross-margin change.
+Allows management to understand why substantial revenue growth did not generate equivalent growth in modeled gross profit.
 
-### Finding 3 — High-Margin Product Revenue Share Declined
+### 02 — Monthly Financial Performance
 
-Colorbuds, a product with a modeled gross margin of approximately
-53.37%, experienced a substantial decline in revenue contribution.
+**Purpose:** Identify how revenue and gross-margin performance changed across the comparable reporting months.
 
-- Revenue declined by approximately 53.08%.
-- Company revenue share fell from approximately 17.51%
-  to 6.28%.
-- Its contribution to the product-level margin-mix
-  decomposition was approximately -5.9934 pp.
+**Key Features:**
+
+- Monthly revenue trends
+- Monthly gross-margin comparisons
+- January–September 2022 vs. 2023
+- Interactive month filtering
+- Executive analytical commentary
+- Identification of the largest monthly margin declines
+
+**Business Value:**
+
+Helps management identify reporting periods that require deeper investigation.
+
+### 03 — Store Profitability Intelligence
+
+**Purpose:** Identify location-level performance drivers and prioritize stores based on their modeled financial margin impact.
+
+**Key Features:**
+
+- Revenue Growth Drivers by Store Location
+- Gross Profit Growth Contribution by Location
+- Top 10 Stores with the Largest Negative Modeled Financial Margin Impact
+- Gross Margin Evolution by Store Location
+- Interactive highlighting and financial tooltips
+
+**Business Value:**
+
+Supports financial prioritization by identifying stores where modeled margin deterioration had the greatest monetary impact relative to a historical-margin benchmark.
+
+### Dashboard Interactivity
+
+The published Tableau workbook provides:
+
+- Navigation between all three dashboards
+- Interactive financial tooltips
+- Month-based filtering
+- Location-level highlighting
+- Executive analytical commentary
+- Consistent financial performance measures
+
+**[View the Published Tableau Project](https://public.tableau.com/views/StoreMarginPerformanceIntelligence/ExecutiveDashboardFinancialPerformance)**
+
+---
+
+## 4. Key Analytical Findings
+
+### Finding 1 — Gross-Margin Deterioration Was Widespread Across Stores
+
+The store-level analysis identified broad deterioration in modeled gross-margin performance.
+
+**Key Results:**
+
+- **49 of 50 stores** experienced a lower gross-margin percentage.
+- **Guadalajara 1** was the only store recording an improvement.
+- The within-store margin component accounted for approximately **99.28%** of the net company margin decline under the project's store-level decomposition method.
+
+This indicates that changes in modeled margin rates within stores deserve more attention than changes in revenue distribution between stores alone.
+
+**Management Implication:**
+
+Investigate product assortment, category composition, pricing information, and cost structures within affected stores.
+
+The decomposition identifies mathematical contributions; it does not independently establish the operational cause of deterioration.
+
+### Finding 2 — Product-Category Composition Changed Significantly
+
+The analysis identified major changes in modeled revenue distribution across product categories.
+
+**Electronics:**
+
+- Revenue declined approximately **27.85%**.
+- Revenue share decreased from approximately **21.00% to 11.58%**.
+
+**Art & Crafts:**
+
+- Revenue increased approximately **251.90%**.
+- Revenue share increased from approximately **9.61% to 25.84%**.
+
+#### Category Margin Decomposition
+
+The overall company margin decline was decomposed into two components:
+
+| Component | Contribution |
+|---|---:|
+| Within-Category Margin Changes | −1.7934 pp |
+| Category Revenue-Mix Changes | −1.5529 pp |
+| **Total Gross-Margin Change** | **−3.3464 pp** |
+
+#### Contribution by Product Category
+
+| Product Category | Total Contribution |
+|---|---:|
+| Electronics | **−5.4019 pp** |
+| Toys | −1.5746 pp |
+| Games | −0.6750 pp |
+| Sports & Outdoors | +0.1240 pp |
+| Art & Crafts | **+4.1812 pp** |
+
+*The displayed category values are rounded. Small reconciliation differences may arise when summing individually rounded contributions.*
+
+**Interpretation:**
+
+Electronics was the largest negative contributor under the selected decomposition methodology.
+
+Art & Crafts recorded the largest positive contribution, partially offsetting negative contributions elsewhere.
+
+These are mathematical contributions to the overall margin movement, not proof of specific operational causes.
+
+**Management Implication:**
+
+Investigate changes in category revenue shares, category-level modeled margins, and product composition before deciding on corrective actions.
+
+### Finding 3 — Modeled Store Margin Impact Reached −$231,306.41
+
+The project developed a financial-impact measure to prioritize stores experiencing gross-margin deterioration.
+
+**Combined Modeled Store Margin Impact:**
+
+### **−$231,306.41**
+
+This calculation compares each store's actual modeled 2023 gross margin with the modeled gross profit it would have generated if it had maintained its 2022 gross-margin percentage on its 2023 revenue.
+
+#### Calculation
+
+```text
+Modeled Store Margin Impact (USD)
+
+= 2023 Store Revenue
+  × (2023 Store Gross Margin − 2022 Store Gross Margin)
+```
+
+The margin rates are expressed as decimal values.
+
+#### Selected High-Impact Stores
+
+| Store | Modeled Financial Margin Impact |
+|---|---:|
+| Maven Toys Ciudad de Mexico 2 | −$14,538.43 |
+| Maven Toys Ciudad Victoria 1 | −$14,176.75 |
+| Maven Toys Mexicali 1 | −$11,640.01 |
+| Maven Toys Guadalajara 3 | −$11,530.40 |
+| Maven Toys Monterrey 2 | −$11,247.07 |
+
+**Important Interpretation:**
+
+The value of **−$231,306.41** represents a modeled benchmark shortfall relative to maintaining prior-year store gross-margin rates.
+
+It is **not** an actual realized cash loss, an audited financial loss, or a guaranteed recoverable amount.
+
+**Management Implication:**
+
+Prioritize investigation of stores exhibiting the largest absolute negative modeled margin impact, while considering sales volumes, category mix, and operational evidence.
+
+### Finding 4 — High-Margin Product Revenue Share Declined
+
+The product-level analysis identified an important change involving **Colorbuds**, a product with an approximately **53.37% modeled gross margin**.
+
+**Key Results:**
+
+- Modeled revenue declined approximately **53.08%**.
+- Company revenue share decreased from approximately **17.51% to 6.28%**.
+- Product-level margin-mix contribution was approximately **−5.9934 pp**.
 
 Other products generated offsetting positive contributions.
 
-The complete product-level decomposition reconciled to the
-company-wide gross-margin change of -3.3464 pp.
+The complete product-level decomposition reconciled to the company's total gross-margin change of **−3.3464 pp**.
 
-**Management implication:** Investigate the reduction in Colorbuds
-sales and determine whether assortment, availability, or customer
-demand contributed to the observed change.
+The Colorbuds contribution belongs to the product-level decomposition and must not be added to category-level or store-level contributions.
 
-These potential explanations require additional evidence.
+**Management Implication:**
 
-### Finding 4 — July and August Had the Largest Monthly Declines
+Investigate changes in product demand, assortment, inventory availability, and competitive positioning.
 
-Gross-margin percentage declined in every comparable month
-from January through September.
+These potential explanations require additional supporting evidence.
 
-The largest individual monthly year-over-year declines occurred in:
+### Finding 5 — Gross Margin Declined Across All Nine Months
 
-| Month | Gross-margin change |
+Monthly analysis showed that modeled gross-margin percentages declined during every comparable month from January through September.
+
+#### Largest Monthly Declines
+
+| Month | Gross-Margin YoY Change |
 |---|---:|
-| July | -6.4902 pp |
-| August | -5.9874 pp |
-| February | -3.7016 pp |
+| July | **−6.4902 pp** |
+| August | **−5.9874 pp** |
+| February | −3.7016 pp |
 
-September recorded the smallest individual monthly decline
-at -0.9878 pp.
+September recorded the smallest decline at approximately **−0.9878 pp**.
 
-**Management implication:** Investigate product and category
-revenue-mix changes during July and August.
+**Management Implication:**
+
+Investigate the category and product composition of sales during July and August, when margin deterioration was most pronounced.
+
+Two comparable partial-year periods are insufficient to establish recurring seasonality.
 
 ---
 
-## 4. Analytical Methodology
+## 5. Analytical Methodology
 
-The project follows a structured analytics workflow:
+The project follows the Google Data Analytics analytical process:
 
 **ASK → PREPARE → PROCESS → ANALYZE → SHARE → ACT**
 
-### ASK
+### ASK — Define the Business Problem
 
-Define the financial business problem, stakeholders, scope,
-success criteria, and analytical questions.
+Established the central financial question, stakeholders, reporting scope, success criteria, and analytical objectives.
 
-### PREPARE
+**Focus:**
 
-Review the source datasets, metadata, data quality,
-relationships, and reporting coverage.
+Understand the relationship between revenue growth, modeled cost growth, gross-profit performance, and declining gross-margin percentages.
 
-### PROCESS
+### PREPARE — Understand the Data
 
-Create an analysis-ready CLEAN data layer in Google BigQuery.
+Reviewed the source datasets and assessed their suitability for the business problem.
 
-Processing and validation included:
+Activities included:
 
-- Data-type standardization
-- Consistent lower_snake_case naming
-- Date and numeric field validation
-- Key and relationship checks
-- Temporal-integrity checks
-- RAW-to-CLEAN row-preservation auditing
+- Dataset structure review
+- Metadata inspection
+- Primary and foreign key identification
+- Date coverage validation
+- Source relationship analysis
+- Data-quality assessment
 
-### ANALYZE
+### PROCESS — Prepare and Validate Data
 
-Develop and validate 12 documented SQL analyses covering:
+Created the analysis-ready CLEAN layer in Google BigQuery.
 
-- Financial baselines and YoY comparisons
+Processing included:
+
+- Standardizing data types
+- Applying consistent `lower_snake_case` naming
+- Validating dates and numeric fields
+- Checking primary and foreign key relationships
+- Testing temporal integrity
+- Auditing RAW-to-CLEAN row preservation
+- Preparing consistent analytical datasets
+
+### ANALYZE — Financial Investigation
+
+Developed and validated **12 SQL analyses** covering:
+
+- Financial baselines
+- Year-over-year comparisons
 - Financial KPI reconciliation
-- Store performance and margin decomposition
-- Category performance and margin decomposition
-- Product performance and margin-mix contributions
-- Monthly financial performance and margin trends
+- Store profitability analysis
+- Store-level margin decomposition
+- Category profitability analysis
+- Category-level margin decomposition
+- Product-level margin-mix contributions
+- Monthly performance trends
 
-### SHARE
+The analyses were designed to reconcile financial calculations and identify contributions to the modeled company-wide margin change.
 
-**Next phase:** Develop an executive dashboard and communicate
-the validated findings through a management-focused narrative.
+### SHARE — Executive Business Intelligence
 
-### ACT
+**Status: Completed**
 
-Translate analytical findings into prioritized management
-investigations and measurable follow-up actions.
+Developed and published three interactive Tableau dashboards:
 
-The ACT phase will present recommendations, not claim that
-operational changes have already been implemented.
+1. Executive Financial Overview
+2. Monthly Financial Performance
+3. Store Profitability Intelligence
+
+The dashboards communicate the validated financial findings through executive KPIs, interactive visualizations, financial-impact comparisons, and management-focused insights.
+
+**[Explore the Tableau Dashboards](https://public.tableau.com/views/StoreMarginPerformanceIntelligence/ExecutiveDashboardFinancialPerformance)**
+
+The Tableau workbook uses locally prepared CSV extracts derived from the analytical work rather than a live BigQuery connection.
+
+### ACT — Management Recommendations
+
+Translated the analytical findings into prioritized management investigations and monitoring recommendations.
+
+The ACT stage documents recommended actions.
+
+It does not claim that operational changes were implemented or that financial improvements have already been achieved.
 
 ---
 
-## 5. Data Model
+## 6. Data Model and Financial Calculations
 
-The analysis uses five source datasets.
+### Source Datasets
+
+The project uses five source datasets.
 
 | Dataset | Purpose |
 |---|---|
@@ -213,71 +391,100 @@ The analysis uses five source datasets.
 | Products | Product attributes, categories, prices, and costs |
 | Stores | Store names, cities, locations, and opening dates |
 | Inventory | Stock-on-hand snapshot by store and product |
-| Calendar | Date reference data |
+| Calendar | Date reference information |
 
-The analysis-ready tables are maintained in the
-Google BigQuery dataset:
+### BigQuery Analytical Dataset
 
 `store-margin-intelligence.maven_toys_clean`
 
-### Financial Calculations
+### Core Financial Calculations
 
-**Revenue**
+**Modeled Revenue**
 
-`SUM(units * product_price)`
+```sql
+SUM(units * product_price)
+```
 
-**Cost of Goods Sold**
+**Modeled Cost of Goods Sold**
 
-`SUM(units * product_cost)`
+```sql
+SUM(units * product_cost)
+```
 
-**Gross Profit**
+**Modeled Gross Profit**
 
-`Revenue - COGS`
+```text
+Revenue − COGS
+```
 
 **Gross Margin (%)**
 
-`Gross Profit / Revenue * 100`
+```text
+Gross Profit / Revenue × 100
+```
 
-**YoY Gross-Margin Change (pp)**
+**Year-over-Year Gross-Margin Change**
 
-`Gross Margin 2023 (%) - Gross Margin 2022 (%)`
+```text
+Gross Margin 2023 (%) − Gross Margin 2022 (%)
+```
 
-All company gross-margin percentages are calculated using
-total gross profit divided by total revenue.
+**Modeled Store Margin Impact**
 
-Monthly, store, category, or product margin percentages
-are not averaged to calculate the company margin.
+```text
+2023 Store Revenue
+× (2023 Store Margin Rate − 2022 Store Margin Rate)
+```
+
+For the store-impact calculation, margin rates are decimal values, not percentage numbers.
+
+### Financial Calculation Principle
+
+Company-wide gross margin is calculated using:
+
+```text
+Total Gross Profit / Total Revenue
+```
+
+It is not calculated by taking the simple average of store, category, product, or monthly gross-margin percentages.
+
+This ensures that the company-wide result correctly reflects revenue weighting.
 
 ---
 
-## 6. Financial Reconciliation and Analytical Controls
+## 7. Financial Reconciliation and Analytical Controls
 
-Financial accuracy and reproducibility are central
-to this project.
+Financial accuracy, reconciliation, and reproducibility are central to this project.
 
-The analyses include:
+The SQL analyses include:
 
 - Revenue, COGS, and gross-profit reconciliation
-- Comparable reporting-period controls
-- Store-level margin-decomposition reconciliation
-- Category-level margin-decomposition reconciliation
+- Comparable reporting-period validation
+- RAW-to-CLEAN data preservation checks
+- Primary and foreign key validation
+- Store-level margin decomposition
+- Category-level margin decomposition
 - Product-level margin-mix reconciliation
 - Monthly financial-total reconciliation
+- Store-level benchmark impact calculations
 
-The store, category, and product decompositions each
-independently reconcile to the same company-wide
-gross-margin change of **-3.3464 pp**.
+### Reconciliation Principle
 
-These are alternative analytical views of the same
-financial movement.
+The store, category, and product decompositions independently explain the same company-wide gross-margin movement of approximately **−3.3464 percentage points**.
 
-**Their effects must not be added together.**
+These are alternative analytical perspectives.
+
+**They must not be added together.**
+
+The modeled store margin impact of **−$231,306.41** is a separate dollar-denominated benchmark comparison, not another percentage-point decomposition.
 
 ---
 
-## 7. Project Repository
+## 8. Repository Structure and Supporting Evidence
 
-### Documentation
+The repository documents the analytical workflow, SQL development, methodology, and financial findings.
+
+### Project Documentation
 
 [View Project Documentation](A_docs/)
 
@@ -293,6 +500,8 @@ Key deliverable:
 - [PROCESS SQL](B_sql/02_process/)
 - [ANALYZE SQL — 12 Queries](B_sql/03_analyze/)
 
+The SQL files document the analytical logic supporting the final business findings.
+
 ### Supporting Evidence
 
 [View Evidence Repository](C_evidence/)
@@ -307,111 +516,143 @@ Selected ANALYZE evidence:
 2. [Gross-Margin Decomposition](C_evidence/03_analyze/02_margin_decomposition.png)
 3. [Monthly Margin Trends](C_evidence/03_analyze/03_monthly_margin_trends.png)
 
-The evidence images supplement the documented SQL queries.
-They do not replace reproducible analysis.
+### Tableau Dashboard Evidence
+
+The final dashboards can be documented using the following image structure:
+
+```text
+C_evidence/
+    04_tableau_dashboards/
+        01_executive_overview.png
+        02_monthly_performance.png
+        03_store_profitability.png
+```
+
+These screenshot files are intended to be added as supporting visual evidence.
+
+The live Tableau Public workbook remains the primary interactive reporting deliverable.
 
 ---
 
-## 8. Tools and Technologies
+## 9. Tools and Technologies
 
-### Used in the Completed Analytical Workflow
+| Technology | Application |
+|---|---|
+| Google BigQuery | Data storage, analytical queries, RAW and CLEAN layers, financial reconciliation |
+| SQL | Joins, CTEs, aggregations, conditional logic, window functions, KPI calculations, and margin decomposition |
+| Tableau Public Desktop | Development of three interactive executive financial dashboards using prepared CSV extracts |
+| Tableau Public | Publication and interactive sharing of the completed dashboards |
+| GitHub | Version-controlled SQL, analytical documentation, supporting evidence, and professional portfolio presentation |
 
-**Google BigQuery**
-- Data storage and analytical queries
-- RAW and CLEAN data layers
-- Financial aggregation and reconciliation
+### Technical Capabilities Demonstrated
 
-**SQL**
-- Common table expressions
-- Joins and aggregations
-- Conditional calculations
-- Window functions
-- Financial KPI calculations
-- Margin-mix decomposition
-
-**GitHub**
-- Version-controlled SQL
-- Project documentation
-- Supporting analytical evidence
-
-### Planned for the SHARE Stage
-
-**Business Intelligence Dashboard**
-- Executive KPI reporting
-- Financial trend visualization
-- Store and product performance analysis
-- Interactive financial exploration
-
-The dashboard tool and final reporting artifacts will be
-documented when implemented.
+- Relational data analysis
+- SQL query development
+- Financial modeling
+- Data preparation and quality assurance
+- Financial KPI reconciliation
+- Revenue-weighted calculations
+- Gross-margin decomposition
+- Financial-impact analysis
+- Interactive data visualization
+- Executive business reporting
+- Evidence-based recommendations
 
 ---
 
-## 9. Data Limitations and Interpretation
+## 10. Data Limitations and Interpretation
 
-This project uses a public retail dataset and modeled
-financial measures.
+This project uses a public retail dataset and modeled financial measures rather than independently audited financial statements.
 
 Important limitations include:
 
-- Product prices and costs are static master-data attributes.
-- Historical transaction-level prices and costs are unavailable.
-- Supplier cost inflation cannot be verified.
-- Historical product stockouts cannot be inferred from
-  the inventory snapshot.
-- Gross-margin decomposition is mathematical attribution,
-  not proof of operational causation.
-- Two partial-year comparison periods do not establish
-  reliable recurring seasonality.
-- Operating expenses, financing costs, and net income
-  are outside the analysis scope.
+1. Product prices and costs are static master-data attributes.
+2. Historical transaction-level selling prices and acquisition costs are unavailable.
+3. Revenue, COGS, gross profit, and gross margins are modeled financial measures.
+4. Actual supplier cost inflation and historical price changes cannot be verified.
+5. Historical product stockouts cannot be inferred from a single inventory snapshot.
+6. Gross-margin decomposition is mathematical attribution, not proof of operational causation.
+7. Two comparable partial-year reporting periods are insufficient to establish recurring seasonality.
+8. The modeled store margin impact is a counterfactual benchmark shortfall, not an actual realized loss.
+9. Operating expenses, financing costs, taxes, and net income are outside the analysis scope.
+10. Tableau dashboards use prepared analytical extracts rather than continuously refreshed live financial systems.
 
-All management recommendations are framed as
-evidence-based investigative priorities.
+These limitations are considered when interpreting findings and recommending management actions.
 
----
-
-## 10. Management Recommendations
-
-Based on the validated analysis, management should prioritize:
-
-1. Investigating the substantial reduction in Colorbuds
-   revenue and company revenue share.
-2. Reviewing the contraction in Electronics and changes
-   in product-category revenue composition.
-3. Examining stores with the largest negative
-   revenue-weighted margin contributions.
-4. Investigating July and August product-mix changes.
-5. Establishing a recurring gross-margin monitoring
-   framework through an executive dashboard.
-
-For supporting calculations and detailed interpretation,
-see the
-[Executive Findings Report](A_docs/08_executive_findings_and_recommendations.md).
+All recommendations represent evidence-based priorities for further investigation.
 
 ---
 
-## 11. Project Status
+## 11. Management Recommendations
 
-| Stage | Status |
+Based on the analytical findings, management should prioritize the following actions.
+
+### Recommendation 1 — Investigate Category Composition
+
+Review the contraction in Electronics revenue share and the expansion of Art & Crafts.
+
+Examine changes in category-level margins, sales composition, and individual product contributions.
+
+### Recommendation 2 — Prioritize High-Impact Stores
+
+Investigate stores showing the largest negative modeled financial margin impacts.
+
+Use store-level analysis to identify the product and category changes contributing to each result.
+
+### Recommendation 3 — Examine Colorbuds Performance
+
+Review the substantial reduction in Colorbuds revenue and company revenue share.
+
+Investigate potential changes in demand, assortment, pricing, and product availability using additional evidence.
+
+### Recommendation 4 — Investigate July and August
+
+Examine the financial and product-mix movements associated with the two largest monthly margin declines.
+
+Identify whether these changes were concentrated in specific categories, products, or stores.
+
+### Recommendation 5 — Establish Ongoing Financial Monitoring
+
+Use the developed Tableau dashboards as a prototype for a recurring executive financial monitoring framework.
+
+For production use, integrate current transaction-level pricing, cost, inventory, and operating data.
+
+Detailed recommendations are available in the:
+
+[Executive Financial Findings & Management Recommendations Report](A_docs/08_executive_findings_and_recommendations.md)
+
+---
+
+## 12. Project Status
+
+| Analytical Stage | Status |
 |---|---|
 | ASK | Completed |
 | PREPARE | Completed |
 | PROCESS | Completed |
 | ANALYZE | Completed — 12 validated SQL analyses |
-| SHARE | Next — Executive dashboard development |
-| ACT | Recommendations documented; implementation not evaluated |
+| SHARE | **Completed — 3 interactive dashboards published on Tableau Public** |
+| ACT | Recommendations documented; implementation and real-world outcomes not evaluated |
 
-### Next Milestone
+### Completed Deliverables
 
-Develop a professional executive financial dashboard
-that communicates the company's financial performance,
-gross-margin deterioration, product-mix changes,
-and management priorities.
+- Business problem definition
+- Source-data review
+- Analysis-ready BigQuery data preparation
+- Financial KPI reconciliation
+- Twelve documented SQL analyses
+- Store, category, and product profitability analysis
+- Monthly financial performance analysis
+- Modeled store financial-impact evaluation
+- Three interactive Tableau dashboards
+- Executive financial findings
+- Evidence-based management recommendations
+
+**Portfolio Status:** Analytical and visualization deliverables completed. GitHub evidence organization and documentation alignment remain subject to final review.
 
 ---
 
-## 12. Project Purpose
+## 13. Project Purpose
 
 This project demonstrates practical capabilities in:
 
@@ -421,16 +662,39 @@ This project demonstrates practical capabilities in:
 - Data preparation and validation
 - Financial reconciliation
 - Gross-margin decomposition
+- Financial-impact modeling
+- Tableau dashboard development
 - Analytical interpretation
 - Executive communication
+- Evidence-based management recommendations
 - Reproducible portfolio documentation
 
-The intended audience includes financial analysts,
-business analysts, finance managers, and senior
-management stakeholders.
+The intended audience includes:
 
-**Project:** Store Margin & Performance Intelligence
+- Financial Data Analysts
+- Business Analysts
+- Finance Managers
+- Financial Planning and Analysis Professionals
+- Senior Management Stakeholders
 
-**Data source:** Maven Analytics — Mexico Toy Sales
+---
 
-**Current phase:** SHARE — Executive Dashboard Development
+### Project Information
+
+**Project Name:** Store Margin & Performance Intelligence
+
+**Dataset:** Maven Analytics — Mexico Toy Sales
+
+**Reporting Period:** January–September 2022 vs. January–September 2023
+
+**Primary Technologies:** Google BigQuery, SQL, Tableau Public, GitHub
+
+**GitHub Repository:** [branch-profitability-intelligence](https://github.com/salmanalbokali-cell/branch-profitability-intelligence)
+
+**Interactive Tableau Portfolio:** [View the Three Executive Dashboards](https://public.tableau.com/views/StoreMarginPerformanceIntelligence/ExecutiveDashboardFinancialPerformance)
+
+**Project Status:** Completed analytical and Tableau reporting stages
+
+---
+
+*This project is an independent educational and professional portfolio case study using publicly available retail data. Financial results are modeled for analytical purposes and should not be interpreted as audited accounting figures.*
