@@ -14,6 +14,19 @@ product-level contributions, and monthly financial trends.
 The objective is to transform validated financial data into
 evidence-based insights that support management decision-making.
 
+
+## Interactive Tableau Dashboard
+
+Explore the complete Store Margin & Performance Intelligence project through three interactive executive dashboards:
+
+**[View the Interactive Tableau Dashboard](https://public.tableau.com/views/StoreMarginPerformanceIntelligence/ExecutiveDashboardFinancialPerformance)**
+
+The interactive experience includes:
+
+- **01 | Executive Overview:** Financial KPIs, revenue growth, gross margin deterioration, and category contributions.
+- **02 | Monthly Performance:** Monthly revenue trends and gross margin comparisons.
+- **03 | Store Profitability:** Location performance, margin evolution, and the Top 10 stores by modeled financial margin impact.
+
 ---
 
 ## 1. Business Problem
