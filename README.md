@@ -74,6 +74,19 @@ This does not mean total gross profit declined. Rather, the company generated le
 
 The completed analytical results are presented through three interconnected Tableau dashboards designed to support executive financial decision-making.
 
+### Dashboard Previews
+
+#### 01 — Executive Financial Overview
+![Executive Financial Overview](C_evidence/04_share/01_executive_overview.png)
+
+#### 02 — Monthly Financial Performance
+![Monthly Financial Performance](C_evidence/04_share/02_monthly_performance.png)
+
+#### 03 — Store Profitability Intelligence
+![Store Profitability Intelligence](C_evidence/04_share/03_store_profitability.png)
+
+**[Open the Interactive Tableau Dashboard](https://public.tableau.com/views/StoreMarginPerformanceIntelligence/ExecutiveDashboardFinancialPerformance)**
+
 ### [Launch the Complete Interactive Dashboard](https://public.tableau.com/views/StoreMarginPerformanceIntelligence/ExecutiveDashboardFinancialPerformance)
 
 ### 01 — Executive Financial Overview
